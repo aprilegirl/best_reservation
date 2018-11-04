@@ -1,6 +1,8 @@
 <?php
 include('ConnectionConstants.php');
+include('sqlfunctions.php');
 include('messages.php');
+
 
 function isPost(){
 	return $_SERVER['REQUEST_METHOD'] === 'POST';
@@ -65,10 +67,7 @@ function SaveReservation (){
 	$email= $_POST ['email'];
 	$gender = $_POST['gender'];
 
-	$conn = mysqli_connect(SERVERNAME, USERNAME, PASSWORD, DBNAME);// Check connection
-	if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-	}
+	$conn = getconnection();
 
 	$sql = "INSERT INTO reservations_training (name, surname, email, gender)
 	VALUES ('$name','$surname','$email','$gender')";
